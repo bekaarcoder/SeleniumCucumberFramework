@@ -14,8 +14,9 @@ Feature: Checkout flow for the product on Autozone
     Then I navigate to checkout page
     And I continue as guest
     And I continue with delivery option
-    Then I add the Payment Information
+    When I add the Payment Information
       | cardNumber       | expiry | cvv |
       | 4811111111111114 | 0224   | 123 |
-    Then I add the billing address
-    Then I complete the purchase
+    And I add the billing address
+    And I complete the purchase
+    Then validate order is successful
