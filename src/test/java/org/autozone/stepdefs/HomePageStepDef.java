@@ -38,8 +38,9 @@ public class HomePageStepDef {
         Assert.assertTrue(homePage.isVehicleSelected(vehicle));
     }
     @When("I search for {string} and navigate to product page")
-    public void i_search_for_and_navigate_to_product_page(String string) {
-        System.out.println("TODO:");
+    public void i_search_for_and_navigate_to_product_page(String keyword) {
+        homePage.enterSearchKeyword(keyword);
+        homePage.clickOnSearch();
     }
     @Then("I add the product to cart and navigate to cart page")
     public void i_add_the_product_to_cart_and_navigate_to_cart_page() {

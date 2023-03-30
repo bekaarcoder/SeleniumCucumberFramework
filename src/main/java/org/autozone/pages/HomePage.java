@@ -24,6 +24,8 @@ public class HomePage {
     private final By makerDropdownLocator = By.xpath("//div[@data-testid='makeheader-dropdown-list']//button");
     private final By modelDropdownLocator = By.xpath("//div[@data-testid='modelheader-dropdown-list']//button");
     private final By vehicleTextLocator = By.xpath("(//div[@data-testid='vehicle-text'])[1]");
+    private final By searchFieldLocator = By.xpath("//input[@data-testid='desktop-search-input']");
+    private final By searchBtnLocator = By.id("searchBtnDesktopAndTablet");
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
@@ -56,14 +58,7 @@ public class HomePage {
         selectField(modelLocator, modelDropdownLocator, model);
     }
 
-    private void selectField(By fieldLocator, By dropdownListLocator, String value) {
-        WebElement field = driver.findElement(fieldLocator);
-        field.sendKeys(value);
-        List<WebElement> dropdownLists = driver.findElements(dropdownListLocator);
-        this.wait.until(driver -> dropdownLists.size() > 0);
-        WebElement dropdownList = dropdownLists.stream().filter(element -> element.getText().trim().equals(value)).findFirst().get();
-        dropdownList.click();
-    }
+
 
     public boolean isVehicleSelected(String vehicle) {
         this.wait.until(driver -> ExpectedConditions.invisibilityOfElementLocated(addVehicleHeaderLocator).apply(driver));
@@ -74,5 +69,25 @@ public class HomePage {
             boolean hasCorrectText = vehicleTextElement.getText().trim().equals(vehicle);
             return isDisplayed && hasCorrectText;
         });
+    }
+
+    public void enterSearchKeyword(String keyword) {
+        WebElement searchField = driver.findElement(searchFieldLocator);
+        searchField.sendKeys(keyword);
+    }
+
+    public void clickOnSearch() {
+        this.wait.until(driver -> ExpectedConditions.visibilityOfElementLocated(searchBtnLocator).apply(driver));
+        WebElement searchBtn = driver.findElement(searchBtnLocator);
+        searchBtn.click();
+    }
+
+    private void selectField(By fieldLocator, By dropdownListLocator, String value) {
+        WebElement field = driver.findElement(fieldLocator);
+        field.sendKeys(value);
+        List<WebElement> dropdownLists = driver.findElements(dropdownListLocator);
+        this.wait.until(driver -> dropdownLists.size() > 0);
+        WebElement dropdownList = dropdownLists.stream().filter(element -> element.getText().trim().equals(value)).findFirst().get();
+        dropdownList.click();
     }
 }
