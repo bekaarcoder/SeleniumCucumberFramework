@@ -34,8 +34,8 @@ public class HomePageStepDef {
         homePage.selectModel(model);
     }
     @Then("validate {string} is selected as vehicle")
-    public void validate_is_selected_as_vehicle(String string) {
-        System.out.println("TODO:");
+    public void validate_is_selected_as_vehicle(String vehicle) {
+        Assert.assertTrue(homePage.isVehicleSelected(vehicle));
     }
     @When("I search for {string} and navigate to product page")
     public void i_search_for_and_navigate_to_product_page(String string) {
