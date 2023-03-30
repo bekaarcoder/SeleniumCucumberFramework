@@ -5,7 +5,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.autozone.factory.DriverFactory;
 import org.autozone.pages.HomePage;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
 public class HomePageStepDef {
@@ -27,12 +26,12 @@ public class HomePageStepDef {
         homePage.selectYear(year);
     }
     @When("I select {string} as make")
-    public void i_select_as_make(String string) {
-        System.out.println("TODO:");
+    public void i_select_as_make(String make) {
+        homePage.selectMake(make);
     }
     @When("I select {string} as model")
-    public void i_select_as_model(String string) {
-        System.out.println("TODO:");
+    public void i_select_as_model(String model) {
+        homePage.selectModel(model);
     }
     @Then("validate {string} is selected as vehicle")
     public void validate_is_selected_as_vehicle(String string) {

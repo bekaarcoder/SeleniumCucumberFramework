@@ -17,7 +17,11 @@ public class HomePage {
     private final By addVehicleBtnLocator = By.xpath("(//div[@data-testid='add-vehicle-header-btn'])[1]");
     private final By addVehicleHeaderLocator = By.id("workingOnModal");
     private final By yearLocator = By.id("yearheader");
+    private final By makeLocator = By.id("makeheader");
+    private final By modelLocator = By.id("modelheader");
     private final By yearDropdownLocator = By.xpath("//div[@data-testid='yearheader-dropdown-list']//button");
+    private final By makerDropdownLocator = By.xpath("//div[@data-testid='makeheader-dropdown-list']//button");
+    private final By modelDropdownLocator = By.xpath("//div[@data-testid='modelheader-dropdown-list']//button");
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
@@ -39,11 +43,23 @@ public class HomePage {
     }
 
     public void selectYear(String year) {
-        WebElement yearField = driver.findElement(yearLocator);
-        yearField.sendKeys(year);
-        List<WebElement> yearDropDownLists = driver.findElements(yearDropdownLocator);
-        this.wait.until(driver -> yearDropDownLists.size() > 0);
-        WebElement yearList = yearDropDownLists.stream().filter(element -> element.getText().trim().equals(year)).findFirst().get();
-        yearList.click();
+        selectField(yearLocator, yearDropdownLocator, year);
+    }
+
+    public void selectMake(String make) {
+        selectField(makeLocator, makerDropdownLocator, make);
+    }
+
+    public void selectModel(String model) {
+        selectField(modelLocator, modelDropdownLocator, model);
+    }
+
+    private void selectField(By fieldLocator, By dropdownListLocator, String value) {
+        WebElement field = driver.findElement(fieldLocator);
+        field.sendKeys(value);
+        List<WebElement> dropdownLists = driver.findElements(dropdownListLocator);
+        this.wait.until(driver -> dropdownLists.size() > 0);
+        WebElement dropdownList = dropdownLists.stream().filter(element -> element.getText().trim().equals(value)).findFirst().get();
+        dropdownList.click();
     }
 }
