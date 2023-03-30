@@ -4,7 +4,7 @@ Feature: Checkout flow for the product on Autozone
     Given I am on the autozone home page
 
   Scenario: E2E successful checkout flow for the product
-    Given I am on "Add Vehicle" page
+    Given I am on Add Vehicle modal
     When I select "2020" as year
     And I select "Audi" as make
     And I select "A3 Premium" as model
