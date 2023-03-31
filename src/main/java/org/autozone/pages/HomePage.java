@@ -46,15 +46,15 @@ public class HomePage {
         return this.wait.until(driver -> addVehicleModalHeader.isDisplayed());
     }
 
-    public void selectYear(String year) {
+    public void selectYear(String year) throws InterruptedException {
         selectField(yearLocator, yearDropdownLocator, year);
     }
 
-    public void selectMake(String make) {
+    public void selectMake(String make) throws InterruptedException {
         selectField(makeLocator, makerDropdownLocator, make);
     }
 
-    public void selectModel(String model) {
+    public void selectModel(String model) throws InterruptedException {
         selectField(modelLocator, modelDropdownLocator, model);
     }
 
@@ -82,9 +82,10 @@ public class HomePage {
         searchBtn.click();
     }
 
-    private void selectField(By fieldLocator, By dropdownListLocator, String value) {
+    private void selectField(By fieldLocator, By dropdownListLocator, String value) throws InterruptedException {
         WebElement field = driver.findElement(fieldLocator);
         field.sendKeys(value);
+        Thread.sleep(1000);
         List<WebElement> dropdownLists = driver.findElements(dropdownListLocator);
         this.wait.until(driver -> dropdownLists.size() > 0);
         WebElement dropdownList = dropdownLists.stream().filter(element -> element.getText().trim().equals(value)).findFirst().get();
