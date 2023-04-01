@@ -1,6 +1,7 @@
 package org.autozone.pages;
 
 import com.github.javafaker.Faker;
+import org.autozone.utils.SeleniumUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,6 +15,7 @@ public class CheckoutPage {
     private final WebDriver driver;
     private final WebDriverWait wait;
     private final Faker faker = new Faker(new Locale("en-US"));
+    private SeleniumUtils seleniumUtils = new SeleniumUtils();
 
     // Locators
     private final By checkoutSectionLocator = By.xpath("//section[@data-testid='checkout-main-content']");

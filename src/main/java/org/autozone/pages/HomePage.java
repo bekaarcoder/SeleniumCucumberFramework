@@ -1,5 +1,6 @@
 package org.autozone.pages;
 
+import org.autozone.utils.SeleniumUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -37,8 +38,9 @@ public class HomePage {
     }
 
     public void clickOnAddVehicle() {
-        WebElement addVehicleBtn = driver.findElement(addVehicleBtnLocator);
-        addVehicleBtn.click();
+//        WebElement addVehicleBtn = driver.findElement(addVehicleBtnLocator);
+//        addVehicleBtn.click();
+        SeleniumUtils.clickElement(this.driver, addVehicleBtnLocator);
     }
 
     public boolean isAddVehicleModal() {
