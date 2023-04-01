@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Autozone Cucumber Parallel Suite" verbose="2" parallel="classes" thread-count="2">
+    <test name="Cucumber Tests">
+        <classes>
+            <class name="org.autozone.runner.TestRunner"/>
+        </classes>
+    </test>
+</suite>
