@@ -22,7 +22,7 @@ public class CartPage {
     }
 
     public boolean isCartPage() {
-        return this.wait.until(driver -> ExpectedConditions.visibilityOfElementLocated(checkoutBtnLocator).apply(driver)).isDisplayed();
+        return SeleniumUtils.isElementDisplayed(this.driver, checkoutBtnLocator);
     }
 
     public void navigateToCheckout() {

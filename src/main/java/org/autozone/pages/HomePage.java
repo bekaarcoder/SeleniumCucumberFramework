@@ -4,7 +4,6 @@ import org.autozone.utils.SeleniumUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -34,18 +33,15 @@ public class HomePage {
     }
 
     public boolean isHomePage() {
-        return this.wait.until(driver -> this.driver.findElement(addVehicleBtnLocator).isDisplayed());
+        return SeleniumUtils.isElementDisplayed(this.driver, addVehicleBtnLocator);
     }
 
     public void clickOnAddVehicle() {
-//        WebElement addVehicleBtn = driver.findElement(addVehicleBtnLocator);
-//        addVehicleBtn.click();
         SeleniumUtils.clickElement(this.driver, addVehicleBtnLocator);
     }
 
     public boolean isAddVehicleModal() {
-        WebElement addVehicleModalHeader = driver.findElement(addVehicleHeaderLocator);
-        return this.wait.until(driver -> addVehicleModalHeader.isDisplayed());
+        return SeleniumUtils.isElementDisplayed(this.driver, addVehicleHeaderLocator);
     }
 
     public void selectYear(String year) throws InterruptedException {
@@ -60,11 +56,9 @@ public class HomePage {
         selectField(modelLocator, modelDropdownLocator, model);
     }
 
-
-
     public boolean isVehicleSelected(String vehicle) {
-        this.wait.until(driver -> ExpectedConditions.invisibilityOfElementLocated(addVehicleHeaderLocator).apply(driver));
-        this.wait.until(driver -> ExpectedConditions.visibilityOfElementLocated(vehicleTextLocator).apply(driver));
+        SeleniumUtils.waitForElementInvisibility(this.driver, addVehicleHeaderLocator);
+        SeleniumUtils.waitForElementVisibility(this.driver, vehicleTextLocator);
         WebElement vehicleTextElement = driver.findElement(vehicleTextLocator);
         return this.wait.until(driver -> {
             boolean isDisplayed = vehicleTextElement.isDisplayed();
@@ -74,14 +68,11 @@ public class HomePage {
     }
 
     public void enterSearchKeyword(String keyword) {
-        WebElement searchField = driver.findElement(searchFieldLocator);
-        searchField.sendKeys(keyword);
+        SeleniumUtils.enterKeys(this.driver, searchFieldLocator, keyword);
     }
 
     public void clickOnSearch() {
-        this.wait.until(driver -> ExpectedConditions.visibilityOfElementLocated(searchBtnLocator).apply(driver));
-        WebElement searchBtn = driver.findElement(searchBtnLocator);
-        searchBtn.click();
+        SeleniumUtils.clickElement(this.driver, searchBtnLocator);
     }
 
     private void selectField(By fieldLocator, By dropdownListLocator, String value) throws InterruptedException {

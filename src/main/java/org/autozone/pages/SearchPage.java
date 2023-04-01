@@ -4,7 +4,6 @@ import org.autozone.utils.SeleniumUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -25,11 +24,11 @@ public class SearchPage {
     }
 
     public boolean isSearchPage() {
-        return this.wait.until(driver -> ExpectedConditions.visibilityOfElementLocated(searchPageHeaderLocator).apply(driver)).isDisplayed();
+        return SeleniumUtils.isElementDisplayed(this.driver, searchPageHeaderLocator);
     }
 
     public boolean isSearchListAvailable() {
-        return this.wait.until(driver -> ExpectedConditions.visibilityOfElementLocated(searchListLocator).apply(driver)).isDisplayed();
+        return SeleniumUtils.isElementDisplayed(this.driver, searchListLocator);
     }
 
     public void navigateToProduct() {

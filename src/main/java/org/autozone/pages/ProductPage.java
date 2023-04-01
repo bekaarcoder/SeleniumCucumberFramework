@@ -1,8 +1,8 @@
 package org.autozone.pages;
 
+import org.autozone.utils.SeleniumUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -22,15 +22,15 @@ public class ProductPage {
     }
 
     public boolean isProductPage() {
-        return this.wait.until(driver -> ExpectedConditions.visibilityOfElementLocated(productHeaderLocator).apply(driver)).isDisplayed();
+        return SeleniumUtils.isElementDisplayed(this.driver, productHeaderLocator);
     }
 
     public void addToCart() {
-        this.wait.until(driver -> ExpectedConditions.elementToBeClickable(cartButtonLocator).apply(driver)).click();
+        SeleniumUtils.clickElement(this.driver, cartButtonLocator);
     }
 
     public void navigateToCart() {
-        this.wait.until(driver -> ExpectedConditions.elementToBeClickable(viewCartAndCheckoutBtnLocator).apply(driver)).click();
+        SeleniumUtils.clickElement(this.driver, viewCartAndCheckoutBtnLocator);
     }
 
 }

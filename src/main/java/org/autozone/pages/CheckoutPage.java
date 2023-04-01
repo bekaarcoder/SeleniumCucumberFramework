@@ -5,7 +5,6 @@ import org.autozone.utils.SeleniumUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -47,12 +46,12 @@ public class CheckoutPage {
     }
 
     public boolean isCheckoutPage() {
-        return this.wait.until(driver -> ExpectedConditions.visibilityOfElementLocated(checkoutSectionLocator).apply(driver)).isDisplayed();
+        return SeleniumUtils.isElementDisplayed(this.driver, checkoutSectionLocator);
     }
 
     public void clickOnGuestLink() {
-        this.wait.until(driver -> ExpectedConditions.invisibilityOfElementLocated(loaderLocator).apply(driver));
-        this.wait.until(driver -> ExpectedConditions.elementToBeClickable(guestLinkLocator).apply(driver)).click();
+        SeleniumUtils.waitForElementInvisibility(this.driver, loaderLocator);
+        SeleniumUtils.clickElement(this.driver, guestLinkLocator);
     }
 
     public boolean isDeliveryOptionEnabled() {
@@ -62,7 +61,7 @@ public class CheckoutPage {
     }
 
     public void clickOnContinueForDeliveryOption() {
-        this.wait.until(driver -> ExpectedConditions.elementToBeClickable(deliveryOptionContinueBtnLocator).apply(driver)).click();
+        SeleniumUtils.clickElement(this.driver, deliveryOptionContinueBtnLocator);
     }
 
     public boolean isPaymentInformationEnabled() {
@@ -72,22 +71,19 @@ public class CheckoutPage {
     }
 
     public void enterCardNumber(String cardNumber) {
-        WebElement cardNumberField = driver.findElement(cardNumberLocator);
-        cardNumberField.sendKeys(cardNumber);
+        SeleniumUtils.enterKeys(this.driver, cardNumberLocator, cardNumber);
     }
 
     public void enterExpiry(String expiry) {
-        WebElement expiryField = driver.findElement(expiryLocator);
-        expiryField.sendKeys(expiry);
+        SeleniumUtils.enterKeys(this.driver, expiryLocator, expiry);
     }
 
     public void enterSecurityNumber(String cvv) {
-        WebElement securityField = driver.findElement(securityCodeLocator);
-        securityField.sendKeys(cvv);
+        SeleniumUtils.enterKeys(this.driver, securityCodeLocator, cvv);
     }
 
     public void clickOnContinuePayment() {
-        this.wait.until(driver -> ExpectedConditions.elementToBeClickable(paymentCountinueBtnLocator).apply(driver)).click();
+        SeleniumUtils.clickElement(this.driver, paymentCountinueBtnLocator);
     }
 
     public boolean isBillingAddressEnabled() {
