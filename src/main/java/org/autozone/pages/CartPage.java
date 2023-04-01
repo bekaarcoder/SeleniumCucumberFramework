@@ -1,5 +1,6 @@
 package org.autozone.pages;
 
+import org.autozone.utils.SeleniumUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -13,6 +14,7 @@ public class CartPage {
 
     // Locators
     private final By checkoutBtnLocator = By.xpath("//div[@data-testid='cart-checkout-button']//button");
+    private final By loaderLocator = By.xpath("//*[@data-testid='progressModal']");
 
     public CartPage(WebDriver driver) {
         this.driver = driver;
@@ -24,6 +26,7 @@ public class CartPage {
     }
 
     public void navigateToCheckout() {
-        this.wait.until(driver -> ExpectedConditions.elementToBeClickable(checkoutBtnLocator).apply(driver)).click();
+        SeleniumUtils.waitForElementInvisibility(this.driver, loaderLocator);
+        SeleniumUtils.clickElement(this.driver, checkoutBtnLocator);
     }
 }

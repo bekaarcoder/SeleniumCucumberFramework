@@ -1,8 +1,6 @@
 package org.autozone.utils;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -18,6 +16,15 @@ public class SeleniumUtils {
         getWait(driver).until(d -> ExpectedConditions.elementToBeClickable(element).apply(d)).click();
     }
 
+    public static void clickElement(WebDriver driver, WebElement element) {
+        try {
+            getWait(driver).until(d -> ExpectedConditions.elementToBeClickable(element).apply(d)).click();
+        } catch (ElementNotInteractableException e) {
+            System.out.println("Error: " + e.getMessage());
+            ((JavascriptExecutor)driver).executeScript("arguments[0].click();", element);
+        }
+    }
+
     public static boolean isElementDisplayed(WebDriver driver, By locator) {
         WebElement element = waitForElementVisibility(driver, locator);
         return element.isDisplayed();
@@ -29,10 +36,18 @@ public class SeleniumUtils {
     }
 
     public static WebElement waitForElementVisibility(WebDriver driver, By locator) {
+        /*try {
+            return getWait(driver).until(d -> ExpectedConditions.visibilityOfElementLocated(locator).apply(d));
+        } catch (ElementNotInteractableException e) {
+            System.out.println(e.getMessage());
+            WebElement element = driver.findElement(locator);
+            ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", element);
+            return getWait(driver).until(d -> ExpectedConditions.visibilityOfElementLocated(locator).apply(d));
+        }*/
         return getWait(driver).until(d -> ExpectedConditions.visibilityOfElementLocated(locator).apply(d));
     }
 
-    public static void waitForElementInvisiblity(WebDriver driver, By locator) {
+    public static void waitForElementInvisibility(WebDriver driver, By locator) {
         getWait(driver).until(d -> ExpectedConditions.invisibilityOfElementLocated(locator).apply(d));
     }
 }

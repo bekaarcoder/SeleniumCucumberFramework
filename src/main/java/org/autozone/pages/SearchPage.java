@@ -1,5 +1,6 @@
 package org.autozone.pages;
 
+import org.autozone.utils.SeleniumUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -32,8 +33,9 @@ public class SearchPage {
     }
 
     public void navigateToProduct() {
+        SeleniumUtils.waitForElementVisibility(this.driver, searchListLocator);
         List<WebElement> searchLists = driver.findElements(searchListsLocator);
         this.wait.until(driver -> searchLists.size() > 0);
-        searchLists.get(0).click();
+        SeleniumUtils.clickElement(this.driver, searchLists.get(0));
     }
 }

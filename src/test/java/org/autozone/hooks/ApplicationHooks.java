@@ -2,8 +2,11 @@ package org.autozone.hooks;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import org.autozone.factory.DriverFactory;
 import org.autozone.utils.ConfigReader;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
 import java.util.Properties;
@@ -30,8 +33,12 @@ public class ApplicationHooks {
     }
 
     @After(order = 1)
-    public void tearDown() throws InterruptedException {
-//        Thread.sleep(10000);
+    public void tearDown(Scenario scenario) {
+        if (scenario.isFailed()) {
+            String scenarioName = scenario.getName().replace(" ", "_");
+            byte[] sourcePath = ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
+            scenario.attach(sourcePath, "image/png", scenarioName);
+        }
         driver.quit();
     }
 }

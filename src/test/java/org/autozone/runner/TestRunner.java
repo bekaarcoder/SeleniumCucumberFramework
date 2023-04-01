@@ -9,7 +9,7 @@ import org.testng.annotations.DataProvider;
         glue = {"org.autozone.stepdefs", "org.autozone.hooks"},
         plugin = {
                 "pretty",
-                "html:target/cucumber-reports",
+                "html:target/cucumber-reports.html",
                 "json:target/cucumber.json"
         },
         monochrome = true

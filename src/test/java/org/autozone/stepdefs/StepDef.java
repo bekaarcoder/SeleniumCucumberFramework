@@ -10,7 +10,7 @@ import org.testng.Assert;
 import java.util.List;
 import java.util.Map;
 
-public class HomePageStepDef {
+public class StepDef {
     private final HomePage homePage = new HomePage(DriverFactory.getDriver());
     private final SearchPage searchPage = new SearchPage(DriverFactory.getDriver());
     private final ProductPage productPage = new ProductPage(DriverFactory.getDriver());

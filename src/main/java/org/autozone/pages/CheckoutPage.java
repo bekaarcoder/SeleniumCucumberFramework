@@ -102,7 +102,7 @@ public class CheckoutPage {
         String email = firstName.toLowerCase() + lastName.toLowerCase() + "@mail.com";
         SeleniumUtils.enterKeys(this.driver, firstNameFieldLocator, firstName);
         SeleniumUtils.enterKeys(this.driver, lastNameFieldLocator, lastName);
-        SeleniumUtils.enterKeys(this.driver, phoneNumberFieldLocator, faker.number().digits(10));
+        SeleniumUtils.enterKeys(this.driver, phoneNumberFieldLocator, faker.phoneNumber().cellPhone());
         SeleniumUtils.enterKeys(this.driver, emailFieldLocator, email);
         SeleniumUtils.enterKeys(this.driver, addressFieldLocator, faker.address().streetAddress());
         SeleniumUtils.enterKeys(this.driver, cityFieldLocator, faker.address().city());
@@ -116,11 +116,12 @@ public class CheckoutPage {
     }
 
     public void completePurchase() {
+        SeleniumUtils.waitForElementInvisibility(this.driver, loaderLocator);
         SeleniumUtils.clickElement(this.driver, completePurchaseBtnLocator);
     }
 
     public boolean isPurchaseUnsuccessful() {
-        SeleniumUtils.waitForElementInvisiblity(this.driver, loaderLocator);
+        SeleniumUtils.waitForElementInvisibility(this.driver, loaderLocator);
         return SeleniumUtils.isElementDisplayed(this.driver, notificationError);
     }
 }
