@@ -23,6 +23,11 @@ public class SeleniumUtils {
         return element.isDisplayed();
     }
 
+    public static void enterKeys(WebDriver driver, By locator, String keys) {
+        WebElement element = waitForElementVisibility(driver, locator);
+        element.sendKeys(keys);
+    }
+
     public static WebElement waitForElementVisibility(WebDriver driver, By locator) {
         return getWait(driver).until(d -> ExpectedConditions.visibilityOfElementLocated(locator).apply(d));
     }

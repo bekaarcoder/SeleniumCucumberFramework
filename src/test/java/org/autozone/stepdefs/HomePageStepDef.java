@@ -87,14 +87,22 @@ public class HomePageStepDef {
     }
     @When("I add the billing address")
     public void i_add_the_billing_address() {
-        System.out.println("TODO:");
+        Assert.assertTrue(checkoutPage.isBillingAddressEnabled());
+        checkoutPage.enterBillingInformation();
+        checkoutPage.submitBillingInformation();
     }
     @When("I complete the purchase")
     public void i_complete_the_purchase() {
-        System.out.println("TODO:");
+        checkoutPage.completePurchase();
     }
     @Then("validate order is successful")
     public void validate_order_is_successful() {
-        System.out.println("TODO:");
+        // Temporary check
+        Assert.assertTrue(true);
+    }
+
+    @Then("validate order is unsuccessful")
+    public void validate_order_is_unsuccessful() {
+        Assert.assertTrue(checkoutPage.isPurchaseUnsuccessful());
     }
 }

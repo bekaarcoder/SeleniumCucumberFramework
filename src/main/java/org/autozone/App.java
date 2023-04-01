@@ -8,7 +8,7 @@ public class App {
 
     public static void main(String[] args) {
         Faker faker = new Faker(new Locale("en-US"));
-        System.out.println(faker.name().firstName());
+        System.out.println(faker.name().name());
         System.out.println(faker.name().lastName());
         System.out.println(faker.number().digits(10));
         System.out.println(faker.name().firstName() + "@mail.com");
